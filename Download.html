@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    Save & Download Csv file?
+    <form>
+      <input type="button" value="OK" onclick="google.script.run.withSuccessHandler(executeDownload).SaveAndGetFileUrl();"/>
+    </form>
+  </body>
+  <script>
+    function executeDownload(url)
+    {
+      window.location.href = url;
+    }
+  </script>
+
+</html>
