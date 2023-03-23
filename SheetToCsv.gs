@@ -1,16 +1,18 @@
 
-function onOpen() {
-    SpreadsheetApp.getUi()
-                  .createMenu("Export CSV")
-                  .addItem("This Sheet to CSV","showDialog")
-                  .addToUi();
+function onOpen() 
+{
+  SpreadsheetApp.getUi()
+                .createMenu("Export CSV")
+                .addItem("This Sheet to CSV","showDialog")
+                .addToUi();
 
 };
 
 function showDialog()
 {
   var html = HtmlService.createHtmlOutputFromFile("Download");
-  SpreadsheetApp.getUi().showModalDialog(html,"CSV Download");
+  var saveFileName = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName() + ".csv";
+  SpreadsheetApp.getUi().showModalDialog(html,"Download " + saveFileName);
 } 
 
 function SaveAndGetFileUrl() 
@@ -44,7 +46,7 @@ function convertRangeToCsv(sheet)
       var csv = "";
       for (var row = 0; row < data.length; row++) {
         for (var col = 0; col < data[row].length; col++) {
-          if (data[row][col].toString().indexOf(",") != -1) {
+          if (data[row][col].toString().indexOf(",") != -1 || data[row][col].toString().indexOf("\"") != -1) {
             data[row][col] = "\"" + data[row][col] + "\"";
           }
         }
