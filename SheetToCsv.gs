@@ -15,6 +15,12 @@ function showDialog()
   SpreadsheetApp.getUi().showModalDialog(html,"Download " + saveFileName);
 } 
 
+function hideDialog()
+{
+    var output = HtmlService.createHtmlOutput('<script>google.script.host.close();</script>');
+    SpreadsheetApp.getUi().showModalDialog(output, 'Loading...');
+} 
+
 function SaveAndGetFileUrl() 
 {
   var ss = SpreadsheetApp.getActiveSpreadsheet(); 
@@ -28,7 +34,7 @@ function SaveAndGetFileUrl()
   // create a file in the Docs List with the given name and the csv data
   var file = folder.createFile(fileName, csvData ,MimeType.CSV);
   //File downlaod
-  var downloadURL = file.getDownloadUrl().replace("?e=download&gd=true","");
+  var downloadURL = file.getDownloadUrl();//.replace("?e=download&gd=true","");
 
   return downloadURL;
 } 
