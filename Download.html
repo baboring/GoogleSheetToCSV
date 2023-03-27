@@ -10,10 +10,18 @@
     </form>
   </body>
   <script>
+    let sleep = ms => {  
+      return new Promise(resolve => setTimeout(resolve, ms));  
+    };  
     function executeDownload(url)
     {
-      window.location.href = url;
+      window.open(url);
+      //window.location.href = url;
+      sleep(500).then(() => {  
+        google.script.host.close();
+      });  
     }
+    
   </script>
 
 </html>
